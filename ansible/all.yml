@@ -1,11 +1,12 @@
 ---
-  - hosts: localhost
-    become: true
-    vars:
-      # A to Z
-      apex_ver      : '1.0.0-rc3'
-      aws_cli_ver   : '1.18.26'
-      hugo_ver      : '0.68.2'
-      terraform_ver : '0.12.24'
-    roles:
-      - common
+- name: setup local
+  hosts: localhost
+  become: true
+  vars:
+    # A to Z
+    apex_ver      : '1.0.0-rc3'
+    aws_cli_ver   : '1.18.26'
+    hugo_ver      : '0.68.2'
+    terraform_ver : '0.12.24'
+  roles:
+    - common

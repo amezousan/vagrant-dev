@@ -2,7 +2,9 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
+  id = "ubuntu-18-04"
   config.vm.box = "bento/ubuntu-18.04"
+  config.vm.hostname = "serverless"
   config.vm.network "private_network", ip: "192.168.33.10"
 
   # Create a forwarded port mapping which allows access to a specific port
@@ -27,8 +29,8 @@ Vagrant.configure("2") do |config|
 
   # Play ansible
   config.vm.provision "ansible_local" do |ansible|
-    ansible.limit    = "localhost"
-    ansible.playbook = './ansible/all.yml'
-    ansible.inventory_path = './ansible/inventries/hosts'
+    ansible.playbook       = "./ansible/all.yml"
+    ansible.limit          = "localhost"
+    ansible.inventory_path = "./ansible/inventories/hosts"
   end
 end

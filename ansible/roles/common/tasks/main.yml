@@ -1,0 +1,68 @@
+---
+  - name: Add git repositories to fetch the latest git package
+    apt_repository:
+      repo: ppa:git-core/ppa
+
+  - name: Install pip3
+    apt:
+      name: python3-pip
+      state: latest
+
+  - name: Install Unzip
+    apt:
+      name: unzip
+      state: latest
+  
+  - name: Download and unarchive then install Terraform
+    file:
+      path: /tmp/terraform-{{ terraform_ver }}
+      state: directory
+  - unarchive:
+      src: https://releases.hashicorp.com/terraform/{{ terraform_ver }}/terraform_{{ terraform_ver }}_linux_amd64.zip
+      dest: /tmp/terraform-{{ terraform_ver }}
+      remote_src: yes
+  - copy:
+      src: /tmp/terraform-{{ terraform_ver }}/terraform
+      dest: /usr/local/bin/terraform
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: Download and unarchive then install Apex
+    file:
+      path: /tmp/apex-{{ apex_ver }}
+      state: directory
+  - unarchive:
+      src: https://github.com/apex/apex/releases/download/v{{ apex_ver }}/apex_{{ apex_ver }}_linux_amd64.tar.gz
+      dest: /tmp/apex-{{ apex_ver }}
+      remote_src: yes
+  - copy:
+      src: /tmp/apex-{{ apex_ver }}/apex
+      dest: /usr/local/bin/apex
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: Download and unarchive then install Hugo
+    file:
+      path: /tmp/hugo-{{ hugo_ver }}
+      state: directory
+  - unarchive:
+      src: https://github.com/gohugoio/hugo/releases/download/v{{ hugo_ver }}/hugo_{{ hugo_ver }}_Linux-64bit.tar.gz
+      dest: /tmp/hugo-{{ hugo_ver }}
+      remote_src: yes
+  - copy:
+      src: /tmp/hugo-{{ hugo_ver }}/hugo
+      dest: /usr/local/bin/hugo
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: Install AWS CLI
+    command: python3 -m pip install awscli=={{ aws_cli_ver }}
+
+  - name: Update and upgrade apt packages
+    become: true
+    apt:
+      upgrade: yes
+      update_cache: yes

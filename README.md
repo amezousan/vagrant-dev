@@ -1,7 +1,7 @@
 # vagrant-dev
 
 ## How to use this?
-
+### Initialize
 ```
 $ git clone <this repo>
 $ cd vagrant-dev

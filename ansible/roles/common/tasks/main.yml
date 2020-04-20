@@ -8,6 +8,9 @@
       name: python3-pip
       state: latest
 
+  - name: Install NPM & Nodejs
+    command: snap install node --classic --channel=12
+
   - name: Install Unzip
     apt:
       name: unzip

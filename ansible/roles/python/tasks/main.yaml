@@ -1,0 +1,6 @@
+---
+  - name: Install pillow via pip
+    command: pip3 install Pillow=={{ py_plguin_pillow }}
+
+  - name: Install pyyaml via pip
+    command: pip3 install pyyaml=={{ py_plguin_pyyaml }}
